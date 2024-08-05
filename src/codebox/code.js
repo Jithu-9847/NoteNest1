@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './code.css';
 import { db } from '../firebase'; // Ensure this path is correct
-import { collection, addDoc, getDocs, deleteDoc, doc, orderBy, query } from 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 function Code() {
   const [snippets, setSnippets] = useState([]);
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
   const [selectedSnippet, setSelectedSnippet] = useState(null);
+  const [notification, setNotification] = useState(null); // Notification state
+  const [error, setError] = useState(null); // Error state
 
   useEffect(() => {
     const fetchSnippets = async () => {
@@ -17,6 +19,7 @@ function Code() {
         setSnippets(snippetsList);
       } catch (error) {
         console.error("Error fetching snippets: ", error);
+        setError("Error fetching snippets. Please try again.");
       }
     };
 
@@ -26,26 +29,34 @@ function Code() {
   const handleSave = async () => {
     if (name && content) {
       try {
-        const newSnippet = { name, content, access: 'public', timestamp: new Date() }; // Add timestamp field
-        // Check if there are already 3 snippets
+        const newSnippet = { name, content, access: 'public', timestamp: new Date() };
+        // Check if there are already 10 snippets
         if (snippets.length > 9) {
-          // Delete the oldest snippet
-          const oldestSnippet = snippets[0]; // The first one is the oldest due to sorting
+          const oldestSnippet = snippets[0];
           await deleteDoc(doc(db, 'snippets', oldestSnippet.id));
-          // Remove the deleted snippet from local state
           setSnippets(snippets.slice(1));
         }
-        // Add the new snippet
         const docRef = await addDoc(collection(db, 'snippets'), newSnippet);
         setSnippets([...snippets, { id: docRef.id, ...newSnippet }]);
         setName('');
         setContent('');
+        setNotification('Code saved successfully!');
+        setError(null);
+
+        setTimeout(() => {
+          setNotification(null);
+        }, 3000); // Hide notification after 3 seconds
       } catch (error) {
         console.error("Error saving document: ", error);
+        setError('Failed to save snippet. Please try again.');
       }
     } else {
-      alert('Please provide a title and content before saving.');
+      setError('Please provide a title and content before saving.');
     }
+
+    setTimeout(() => {
+      setError(null);
+    }, 3000); // Hide error after 3 seconds
   };
 
   const handleCopy = (text) => {
@@ -59,6 +70,16 @@ function Code() {
 
   return (
     <div className="code-container">
+      {notification && (
+        <div className="notification">
+          {notification}
+        </div>
+      )}
+      {error && (
+        <div className="error-message">
+          {error}
+        </div>
+      )}
       <main>
         <div className="new-paste">
           <h2>New Paste</h2>
@@ -92,7 +113,9 @@ function Code() {
               </select>
             </label>
             <button onClick={handleSave}>Save</button>
-             <h4 style={{color:"orange",visibility:0.8}}>Note:You can only access the latest 10 pastes. After reaching this limit, old pastes will be deleted.</h4>
+            <h4 style={{color:"orange", visibility: 0.8}}>
+              Note: You can only access the latest 10 pastes. After reaching this limit, old pastes will be deleted.
+            </h4>
           </div>
         </div>
         <div className="recent-pastes">
@@ -100,7 +123,7 @@ function Code() {
           <ul>
             {snippets.map((snippet) => (
               <li key={snippet.id}>
-                <h4>
+                <h4 onClick={() => handleTitleClick(snippet)}>
                   {snippet.name || 'Untitled'}
                 </h4>
                 <button onClick={() => handleCopy(snippet.content)}>Copy</button>
