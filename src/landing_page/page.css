@@ -1,0 +1,46 @@
+.card1 img{
+    width: 250px;
+    height: 250px;
+}
+
+.card1 h4{
+    width: 300px;
+    text-align: end;
+    color: #00a2ff;
+}
+.card1{
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+}
+
+.card2 img{
+    width: 250px;
+    height: 250px;
+}
+
+.card2 h4{
+    width: 300px;
+    text-align: end;
+    color: #00a2ff;
+}
+.card2{
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    flex-direction: row-reverse;
+}
+
+.share img{
+    
+    scale: 1.5;
+}
+.page2{
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

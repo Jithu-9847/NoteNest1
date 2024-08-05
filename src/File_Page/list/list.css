@@ -1,0 +1,273 @@
+
+  
+  body {
+    background-color: var(--background-color);
+    font-family: Arial, sans-serif;
+  }
+  
+  .list-list-container {
+    padding: 20px;
+  }
+  
+  .header {
+   
+    display: flex;
+    justify-content:flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .header-item {
+    cursor: pointer;
+     
+    position: relative;
+    color: var(--primary-blue-dark);
+  }
+  
+  .show-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 2px;
+    background-color: var(--primary-blue-dark);
+  }
+  
+  .list-list {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .list-header, .list-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 10px 0;
+  }
+  
+  .list-header {
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+     
+    color: var(--primary-blue-dark);
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  
+  .sort-options {
+    margin: 10px 0;
+  }
+  
+  .list-row {
+    font-size: 13px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .list-row span {
+    padding: 5px 0;
+  }
+  
+  .download-btn {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #e05d9c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    position: relative;
+  }
+  
+  .download-btn.downloading {
+    background-color: var(--primary-blue-dark);
+    cursor: not-allowed;
+  }
+  
+  .download-btn.downloading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+  }
+  
+  @keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  
+  .show-more-btn {
+    padding: 10px 20px;
+    margin: 20px 0;
+    cursor: pointer;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .show-more-btn:hover {
+    background-color: var(--primary-blue-dark);
+  }
+  
+  .sort-options select {
+    padding: 5px;
+    border: 1px solid var(--primary-blue);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .sort-options label {
+    margin-right: 10px;
+  }
+  
+  .search-bar input {
+    width: 50%;
+    height: 25px;
+    margin-bottom: 30px;
+    color: rgb(8, 0, 255);
+    padding: 5px;
+    border: 0;
+    border-radius: 4px;
+    background-color: #aebec93d;
+     
+  }
+  
+  .no-items {
+    text-align: center;
+    padding: 20px;
+    color: var(--primary-blue-dark);
+  }
+
+  /* list.css */
+.list-list-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+ 
+
+.header-item {
+  cursor: pointer;
+}
+
+.header-item.show-underline {
+  border-bottom: 2px solid #000;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.sort-options label {
+  margin-right: 10px;
+}
+
+.list-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.truncated-title {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.downloading {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.show-more-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+}
+
+.no-items {
+  margin-top: 20px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out forwards;
+}
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #000;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 50px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+  @media only screen and (max-width: 500px) {
+     .down{
+      text-align: center;
+    }
+    .header-item{
+      font-size: 13px;
+    }
+    .list-header{
+      font-size: 13px;
+    }
+    .search-bar input{
+      width: 98%;
+    }
+    .truncated-title {
+      display: block;
+      width: 150px; /* Adjust based on your layout */
+      white-space: nowrap; /* Prevent text from wrapping to the next line */
+      overflow: hidden; /* Hide the overflowed text */
+      text-overflow: ellipsis; /* Display ellipsis for the overflowed text */
+    }
+    
+  }

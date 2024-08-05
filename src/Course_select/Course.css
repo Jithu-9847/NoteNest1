@@ -1,0 +1,53 @@
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  
+    gap: 20px;  
+    max-width: 600px;  
+    margin: 20px auto;  
+    padding: 10px;  
+    animation: fadeIn 0.7s ease-in-out forwards;
+    
+}
+.grid-button {
+    padding: 10px 20px;
+    height: 70px;
+    width: 150px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color:var(--primary-blue-dark);
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.grid-button:hover {
+    background-color: #fca875;
+    color: white; 
+}
+.lab_btn{
+  background-color: green;
+}
+.con{
+  height: 90vh;
+}
+
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .button-grid{
+      grid-template-columns: repeat(2, 1fr);  
+     justify-items: center;
+    }
+  }

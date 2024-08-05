@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.125115c5.css",
+    "main.js": "/static/js/main.4ec496aa.js",
+    "static/js/453.b50ffe1d.chunk.js": "/static/js/453.b50ffe1d.chunk.js",
+    "static/media/Note_Nest_logo.png": "/static/media/Note_Nest_logo.d4d421fa95da0b460f9a.png",
+    "static/media/Tutoring.svg": "/static/media/Tutoring.49db69c04f4d10ae03ec.svg",
+    "index.html": "/index.html",
+    "main.125115c5.css.map": "/static/css/main.125115c5.css.map",
+    "main.4ec496aa.js.map": "/static/js/main.4ec496aa.js.map",
+    "453.b50ffe1d.chunk.js.map": "/static/js/453.b50ffe1d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.125115c5.css",
+    "static/js/main.4ec496aa.js"
+  ]
+}

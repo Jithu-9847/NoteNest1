@@ -1,0 +1,32 @@
+.header {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+ 
+    justify-content: flex-start;
+    /* margin-left: 20px; */
+}
+
+.header-item {
+    position: relative;
+    cursor: pointer;
+}
+
+.header-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px; /* Adjust as needed for the thickness of the underline */
+    width: 0; /* Start with width 0 */
+    height: 3px; /* Adjust as needed for the height/thickness of the underline */
+    background-color: #ffffff; /* Adjust color as needed */
+    opacity: 0; /* Initially hide the underline */
+    transition: opacity 0.3s ease, width 0.3s ease; /* Smooth transition for opacity and width change */
+    border-radius: 2px;
+}
+
+.header-item.show-underline::after {
+    opacity: 1; /* Show the underline when .show-underline class is applied */
+    width: 100%; /* Expand the underline to full width */
+}

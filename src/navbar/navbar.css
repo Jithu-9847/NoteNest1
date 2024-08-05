@@ -1,0 +1,105 @@
+.Nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #fff;
+  position: relative;
+}
+
+.Nav img {
+  height: 50px;
+}
+
+.inner_nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  text-decoration: none; /* Remove underline from links */
+}
+
+.nav-link h3 {
+  margin: 0;
+  color: #83c9ff;
+  transition: color 0.3s; /* Smooth color transition */
+}
+
+.nav-link:hover h3 {
+  color: #007bff; /* Color on hover */
+}
+
+.button-link {
+  text-decoration: none; /* Remove underline from link */
+}
+
+.nav_btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background and transform */
+}
+
+.nav_btn:hover {
+  background-color: #0056b3; /* Darker blue for hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 24px;
+  cursor: pointer;
+  z-index: 1001; /* Ensure it stays on top */
+}
+
+.hamburger .line {
+  width: 30px;
+  height: 3px;
+  background-color: #333;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.open .line1 {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open .line2 {
+  opacity: 0;
+}
+
+.hamburger.open .line3 {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (max-width: 768px) {
+  .inner_nav {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: white;
+    padding: 10px 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .inner_nav.open {
+    display: flex;
+    z-index: 1;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav_btn {
+    display: block; /* Ensure the button is visible in the dropdown */
+  }
+}

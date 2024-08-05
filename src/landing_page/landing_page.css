@@ -1,0 +1,141 @@
+/* landing_page.css */
+.land_head {
+    font-size: 5rem;
+    color: #0984E3;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #83c9ff;
+    margin-top: 0;
+    margin-bottom: 3px;
+}
+
+.btns button {
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #e05d9c;
+    border: 0;
+    margin-right: 20px;
+    font-size: 18px;
+    font-weight: bolder;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.container {
+    margin-left: 10%;
+    margin-top: 17%;
+}
+
+.btns {
+    margin-top: 30px;
+}
+
+.edu_vector {
+    height: 450px;
+    width: 450px;
+    background-image: url("../assests/Tutoring.svg");
+    background-size: contain;
+    position: absolute;
+    top: 48%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+}
+
+.content {
+    transform: translateY(-20px);
+}
+
+/* Animations */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-heading {
+    animation: slideInDown 1s ease-out forwards;
+}
+
+.animate-subheading1 {
+    animation: slideInLeft 1s ease-out forwards;
+    animation-delay: 0.5s;
+    animation-fill-mode: both;
+}
+
+.animate-subheading2 {
+    animation: slideInLeft 1s ease-out forwards;
+    animation-delay: 1s;
+    animation-fill-mode: both;
+}
+
+.animate-buttons {
+    animation: slideInUp 1s ease-out forwards;
+    animation-delay: 1.5s;
+    animation-fill-mode: both;
+}
+
+/* Adjustments for mobile view */
+@media (max-width: 500px) {
+    .land_head {
+        margin-left: 0px;
+        font-size: 3rem;
+    }
+
+    h3 {
+        font-size: 15px;
+    }
+
+    .container {
+        margin-left: 0;
+    }
+
+    .content {
+        margin-left: 30px;
+        height: 100svh;
+        width: 100%;
+    }
+
+    .btns {
+        display: flex;
+        justify-content: center;
+        margin-top: 100%;
+    }
+
+    .edu_vector {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 30%;
+        height: 350px;
+        width: 350px;
+    }
+}

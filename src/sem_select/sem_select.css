@@ -1,0 +1,41 @@
+.sem_select_con{
+    height: 100vh;
+    width: 100vw;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+    transition: 1s;
+}
+
+.sem_btns{
+    width: 150px;
+    height: 100px;
+    border-radius: 20px;
+    border: 0;
+    font-size: 35px;
+    font-weight: bold;
+    background-color: #FFD2B7;
+    transition: 0.2s;
+    cursor: pointer;
+    
+}
+.sem_btns:hover{
+    background-color: #fca875;
+    color: white;
+}
+.sem_row1{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     column-gap: 50px;
+}
+.sem_row2{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    column-gap: 50px;
+}

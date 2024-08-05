@@ -1,0 +1,48 @@
+.BottomPage{
+      
+     height: 40vh;
+     width: 100vw;
+     position: relative;
+}
+.Notification{
+    height: 300px;
+    width: 90%;
+}
+footer {
+    background-color: #f2f2f2;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    margin-top: 20px;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-links {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.footer-links li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.footer-links li a {
+    color: #555;
+    text-decoration: none;
+}
+
+.footer-links li a:hover {
+    text-decoration: underline;
+    color: #333;
+}

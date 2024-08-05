@@ -1,0 +1,26 @@
+:root {
+  --primary-blue: #3498db;
+  --primary-blue-dark: #2980b9;
+  --background-color: #f5f8fa;
+}
+ 
+ .App{
+    scroll-behavior: smooth;
+    
+ }
+ 
+ .page1{
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(255, 255, 255);
+ 
+  
+ 
+ }
+ body::-webkit-scrollbar{
+   display: none;
+ }
+
+ html{
+  background-color: rgb(255, 255, 255);
+ }
