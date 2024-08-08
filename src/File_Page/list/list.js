@@ -13,7 +13,7 @@ const List = () => {
   const [sortedLists, setSortedLists] = useState([]);
   const [sortOption, setSortOption] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [noteType, setNoteType] = useState('notes');
+  const [noteType, setNoteType] = useState('note');
   const [showUnderline, setShowUnderline] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -126,25 +126,25 @@ const List = () => {
       <div className="header">
         <h3
           className={`header-item ${showUnderline === 0 ? 'show-underline' : ''}`}
-          onClick={() => handleTabClick(0, 'notes')}
+          onClick={() => handleTabClick(0, 'note')}
         >
           Notes
         </h3>
         <h3
           className={`header-item ${showUnderline === 1 ? 'show-underline' : ''}`}
-          onClick={() => handleTabClick(1, 'questionpapers')}
+          onClick={() => handleTabClick(1, 'qp')}
         >
           Question Papers
         </h3>
         <h3
           className={`header-item ${showUnderline === 2 ? 'show-underline' : ''}`}
-          onClick={() => handleTabClick(2, 'solvedpapers')}
+          onClick={() => handleTabClick(2, 'solved-qp')}
         >
           Solved QPs
         </h3>
         <h3
           className={`header-item ${showUnderline === 3 ? 'show-underline' : ''}`}
-          onClick={() => handleTabClick(3, 'othernotes')}
+          onClick={() => handleTabClick(3, 'other-note')}
         >
           Other Notes
         </h3>

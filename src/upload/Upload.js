@@ -4,6 +4,7 @@ import { collection, addDoc } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import './upload.css';
 import BottomPage from '../bottom_page/BottomPage';
+import { normalize } from 'gsap';
 
 function Upload() {
   const [file, setFile] = useState(null);
@@ -36,7 +37,7 @@ function Upload() {
 
       try {
         // Upload file to Firebase Storage
-        const storageRef = ref(storage, `${courseCode}/notes/${file.name}`);
+        const storageRef = ref(storage, `${courseCode}/${noteType}/${file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
         uploadTask.on('state_changed', 
@@ -55,7 +56,7 @@ function Upload() {
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 
             // Save metadata to Firestore
-            await addDoc(collection(db, `lists/${courseCode}/notes`), {
+            await addDoc(collection(db, `lists/${courseCode}/${noteType}`), {
               title: file.name,
               noteType,
               courseCode,
