@@ -9,7 +9,9 @@ function Code() {
   const [content, setContent] = useState('');
   const [selectedSnippet, setSelectedSnippet] = useState(null);
   const [notification, setNotification] = useState(null); // Notification state
-  const [error, setError] = useState(null); // Error state
+  const [error, setError] = useState(null); 
+  const [save,setSave]=useState("save")
+  const [is_enable,setEnable]=useState(false)
 
   useEffect(() => {
     const fetchSnippets = async () => {
@@ -27,6 +29,8 @@ function Code() {
   }, []);
 
   const handleSave = async () => {
+    setSave("Saving please wait...")
+    setEnable(true)
     if (name && content) {
       try {
         const newSnippet = { name, content, access: 'public', timestamp: new Date() };
@@ -41,6 +45,8 @@ function Code() {
         setName('');
         setContent('');
         setNotification('Code saved successfully!');
+        setSave("save")
+        setEnable(false)
         setError(null);
 
         setTimeout(() => {
@@ -112,7 +118,7 @@ function Code() {
                 {/* Add more options as needed */}
               </select>
             </label>
-            <button onClick={handleSave}>Save</button>
+            <button onClick={handleSave} disabled={is_enable}>{save}</button>
             <h4 style={{color:"orange", visibility: 0.8}}>
               Note: You can only access the latest 10 pastes. After reaching this limit, old pastes will be deleted.
             </h4>
@@ -126,7 +132,7 @@ function Code() {
                 <h4 onClick={() => handleTitleClick(snippet)}>
                   {snippet.name || 'Untitled'}
                 </h4>
-                <button onClick={() => handleCopy(snippet.content)}>Copy</button>
+                <button onClick={() => handleCopy(snippet.content)} className='cpy_btn'>Copy</button>
               </li>
             ))}
           </ul>
