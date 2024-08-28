@@ -34,9 +34,9 @@ h3 {
 }
 
 .edu_vector {
-    height: 450px;
+    height: 350px;
     width: 450px;
-    background-image: url("https://img.freepik.com/free-vector/online-certification-with-graduate-laptop_23-2148571246.jpg?t=st=1724734185~exp=1724737785~hmac=13a189bfe2aa94ba629ee3599f5b36df370817005b0fca4340ba708f2de917ab&w=1060");
+    background-image: url("https://img.freepik.com/free-vector/focused-people-studying-online-school_74855-5834.jpg?t=st=1724832600~exp=1724836200~hmac=8c92f758b1f4c8da571916da049831889b82829e5b88757935829cbeb80af1c9&w=740");
     background-size: contain;
     position: absolute;
     top: 48%;
@@ -135,7 +135,7 @@ h3 {
         left: 50%;
         transform: translateX(-50%);
         top: 30%;
-        height: 350px;
+        height: 250px;
         width: 350px;
     }
 }
