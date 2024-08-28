@@ -32,6 +32,8 @@ const AboutUs = () => {
         NoteNest is the place for you. Together, we can make learning more accessible and enjoyable
         for everyone.
       </p>
+           <h2>Credit:</h2>
+      <p>Landing Page image is taken from:<a href="https://www.freepik.com/free-vector/focused-people-studying-online-school_8609144.htm#from_view=detail_alsolike">Image by pch.vector on Freepik</a></p>
     </div>
   );
 };
