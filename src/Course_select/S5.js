@@ -5,7 +5,7 @@ function S5() {
   const items = [
     { name: 'MSS', value: 'MSS' },
     { name: 'SS', value: 'SS' },
-    { name: 'MP&MC', value: 'MPMC' },
+    { name: 'MP&MC', value: 'MP&MC' },
     { name: 'FLAT', value: 'FLAT' },
     { name: 'DM', value: 'DM' },
     { name: 'CN', value: 'CN' },
