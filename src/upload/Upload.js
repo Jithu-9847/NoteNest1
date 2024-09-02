@@ -145,6 +145,7 @@ function Upload() {
                 <option value="MSS">MSS</option>
                 <option value="SS">SS</option>
                 <option value="DM">DM</option>
+<option value="CN">CN</option>
                 <option value="MP&MC">MP&MC</option>
                 <option value="SS&MP">SS&MP(LAB)</option>
                 <option value="DBMS">DBMS(LAB)</option>
