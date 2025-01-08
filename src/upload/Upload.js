@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { db, storage } from '../firebase'; // Import Firebase services
 import { collection, addDoc } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import './upload.css';
-import BottomPage from '../bottom_page/BottomPage';
-import { normalize } from 'gsap';
 
 function Upload() {
   const [file, setFile] = useState(null);
@@ -36,37 +33,33 @@ function Upload() {
       setIsUploading(true);
 
       try {
-        // Upload file to Firebase Storage
         const storageRef = ref(storage, `${courseCode}/${noteType}/${file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
-        uploadTask.on('state_changed', 
+        uploadTask.on(
+          'state_changed',
           (snapshot) => {
-            // Calculate and update progress
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             setUploadProgress(progress);
-          }, 
+          },
           (error) => {
             console.error('Error uploading file: ', error);
             alert('Failed to upload file.');
             setIsUploading(false);
-          }, 
+          },
           async () => {
-            // Get the download URL
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 
-            // Save metadata to Firestore
             await addDoc(collection(db, `lists/${courseCode}/${noteType}`), {
               title: file.name,
               noteType,
               courseCode,
               isOwnNote,
               downloadURL,
-              downloads: 0, 
+              downloads: 0,
             });
 
-            
-            handleCancel();  
+            handleCancel();
             setIsUploading(false);
           }
         );
@@ -89,93 +82,114 @@ function Upload() {
   };
 
   return (
-    <div className="main_upload_con">
-      <div className="up_con">
-        <main>
-          <section className="upload-section">
-            <h2>Upload your notes</h2>
-            <div
-              className="upload-box"
-              onDrop={handleDrop}
-              onDragOver={handleDragOver}
-              onClick={handleUploadClick}
-            >
-              {file ? (
-                <p>{file.name}</p>
-              ) : (
-                <>
-                  <p>Drag and drop your notes</p>
-                  <p>We support PDF, images, and text files</p>
-                  <button type="button">Browse files</button>
-                  <input
-                    type="file"
-                    id="fileInput"
-                    onChange={handleFileChange}
-                    style={{ display: 'none' }}
-                  />
-                </>
-              )}
-            </div>
-          </section>
-          <section className="note-details-section">
-            <h2>About the Note</h2>
-            <div className="note-type">
-              <label htmlFor="noteType">Select the Category:</label>
-              <select
-                id="noteType"
-                value={noteType}
-                onChange={(e) => setNoteType(e.target.value)}
+    <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center py-8 px-4">
+      <div className="w-full max-w-2xl bg-gray-800 p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-semibold mb-6 text-center">Upload Your Notes</h2>
+
+        {/* File Upload Section */}
+        <div
+          className="border-2 border-dashed border-gray-500 rounded-lg p-6 flex flex-col items-center cursor-pointer hover:border-indigo-500"
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onClick={handleUploadClick}
+        >
+          {file ? (
+            <p className="text-gray-300">{file.name}</p>
+          ) : (
+            <>
+              <p className="text-gray-400">Drag and drop your notes here</p>
+              <p className="text-gray-400">We support PDF, images, and text files</p>
+              <button
+                type="button"
+                className="mt-4 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-lg"
               >
-                <option value="">Select a category</option>
-                <option value="note">Note</option>
-                <option value="qp">QP</option>
-                <option value="solved-qp">Solved QP</option>
-                <option value="other-note">Other Note</option>
-              </select>
-            </div>
-            <div className="course-code">
-              <label htmlFor="courseCode">Course Code:</label>
-              <select
-                id="courseCode"
-                value={courseCode}
-                onChange={(e) => setCourseCode(e.target.value)}
-              >
-                <option value="">Select a course</option>
-                <option value="FLAT">FLAT</option>
-                <option value="MSS">MSS</option>
-                <option value="SS">SS</option>
-                <option value="DM">DM</option>
-<option value="CN">CN</option>
-                <option value="MP&MC">MP&MC</option>
-                <option value="SS&MP">SS&MP(LAB)</option>
-                <option value="DBMS">DBMS(LAB)</option>
-                {/* Add more course options as needed */}
-              </select>
-            </div>
-            <div className="own-note">
-              <label htmlFor="isOwnNote">Are these your own notes?</label>
-              <select
-                id="isOwnNote"
-                value={isOwnNote}
-                onChange={(e) => setIsOwnNote(e.target.value)}
-              >
-                <option value="">Select an option</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
-            </div>
-          </section>
-          <div className="buttons">
-            <button type="button" onClick={handleCancel}>
-              Cancel
-            </button>
-            <button type="button" onClick={handleSubmit} disabled={isUploading}>
-              {isUploading ? `Uploading... ${uploadProgress.toFixed(0)}%` : 'Submit'}
-            </button>
-          </div>
-        </main>
+                Browse Files
+              </button>
+              <input
+                type="file"
+                id="fileInput"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+            </>
+          )}
+        </div>
+
+        {/* Note Details Section */}
+        <div className="mt-6">
+          <label htmlFor="noteType" className="block text-gray-400 mb-2">
+            Select the Category:
+          </label>
+          <select
+            id="noteType"
+            value={noteType}
+            onChange={(e) => setNoteType(e.target.value)}
+            className="w-full p-2 rounded-lg bg-gray-700 text-gray-300 focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value="">Select a category</option>
+            <option value="note">Note</option>
+            <option value="qp">QP</option>
+            <option value="solved-qp">Solved QP</option>
+            <option value="other-note">Other Note</option>
+          </select>
+
+          <label htmlFor="courseCode" className="block text-gray-400 mt-4 mb-2">
+            Course Code:
+          </label>
+          <select
+            id="courseCode"
+            value={courseCode}
+            onChange={(e) => setCourseCode(e.target.value)}
+            className="w-full p-2 rounded-lg bg-gray-700 text-gray-300 focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value="">Select a course</option>
+            <option value="AAD">AAD</option>
+            <option value="CCW">CCW</option>
+            <option value="CD">CD</option>
+            <option value="CG">CG</option>
+            <option value="ELI">ELI</option>
+            <option value="IE&FT">IE&FT</option>
+            <option value="NW LAB">NW LAB</option>
+
+          </select>
+
+          <label htmlFor="isOwnNote" className="block text-gray-400 mt-4 mb-2">
+            Are these your own notes?
+          </label>
+          <select
+            id="isOwnNote"
+            value={isOwnNote}
+            onChange={(e) => setIsOwnNote(e.target.value)}
+            className="w-full p-2 rounded-lg bg-gray-700 text-gray-300 focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value="">Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        {/* Buttons Section */}
+        <div className="flex justify-between items-center mt-6">
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={isUploading}
+            className={`px-4 py-2 rounded-lg text-white ${isUploading
+                ? 'bg-gray-600 cursor-not-allowed'
+                : 'bg-indigo-500 hover:bg-indigo-400'
+              }`}
+          >
+            {isUploading ? `Uploading... ${uploadProgress.toFixed(0)}%` : 'Submit'}
+          </button>
+        </div>
       </div>
-      {/* <BottomPage/> */}
     </div>
   );
 }

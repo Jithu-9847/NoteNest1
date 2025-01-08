@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, updateDoc, increment } from 'firebase/firestore';
 import { db } from '../../firebase'; // Adjust the path to where your firebase.js is
-import './list.css';
-import BottomPage from '../../bottom_page/BottomPage';
 import { useLocation } from 'react-router-dom';
 
 const List = () => {
@@ -27,7 +25,6 @@ const List = () => {
           return { id: doc.id, ...data };
         });
 
-        console.log('Fetched Data:', dataArray);
         setSortedLists(dataArray);
       } catch (error) {
         console.error('Error fetching data: ', error);
@@ -41,10 +38,7 @@ const List = () => {
   const incrementDownloadCount = async (docId) => {
     const docRef = doc(db, `lists/${value}/${noteType}`, docId);
     try {
-      await updateDoc(docRef, {
-        downloads: increment(1)
-      });
-      console.log('Download count updated successfully');
+      await updateDoc(docRef, { downloads: increment(1) });
     } catch (error) {
       console.error('Error updating download count: ', error);
     }
@@ -56,27 +50,17 @@ const List = () => {
 
   const handleDownloadClick = async (list) => {
     setDownloading(list.id);
-    console.log(`Downloading item at index: ${list.id}`);
 
     try {
-      // Simulate download time
       await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      // Increase download count
       await incrementDownloadCount(list.id);
 
       const anchor = document.createElement('a');
       anchor.href = list.downloadURL;
-      anchor.target = '_blank'; // Open in a new tab
-      anchor.rel = 'noopener noreferrer'; // Security
-
-      // Append to the body (necessary for Firefox)
+      anchor.target = '_blank';
+      anchor.rel = 'noopener noreferrer';
       document.body.appendChild(anchor);
-
-      // Trigger a click on the anchor element
       anchor.click();
-
-      // Remove the anchor from the DOM
       document.body.removeChild(anchor);
 
       setDownloading(null);
@@ -114,85 +98,94 @@ const List = () => {
   );
 
   return (
-    <div className="list-list-container">
-      <div className="search-bar">
+    <div className="min-h-screen bg-gray-900 text-gray-100 p-6 flex flex-col">
+      {/* Search Bar */}
+      <div className="mb-6">
         <input
           type="text"
-          placeholder="Search for note..."
+          placeholder="Search for notes..."
           value={searchQuery}
           onChange={handleSearchChange}
+          className="w-full p-3 rounded-lg bg-gray-800 text-gray-200 placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 outline-none"
         />
       </div>
-      <div className="header">
-        <h3
-          className={`header-item ${showUnderline === 0 ? 'show-underline' : ''}`}
-          onClick={() => handleTabClick(0, 'note')}
-        >
-          Notes
-        </h3>
-        <h3
-          className={`header-item ${showUnderline === 1 ? 'show-underline' : ''}`}
-          onClick={() => handleTabClick(1, 'qp')}
-        >
-          Question Papers
-        </h3>
-        <h3
-          className={`header-item ${showUnderline === 2 ? 'show-underline' : ''}`}
-          onClick={() => handleTabClick(2, 'solved-qp')}
-        >
-          Solved QPs
-        </h3>
-        <h3
-          className={`header-item ${showUnderline === 3 ? 'show-underline' : ''}`}
-          onClick={() => handleTabClick(3, 'other-note')}
-        >
-          Other Notes
-        </h3>
+
+      {/* Header Tabs */}
+      <div className="flex justify-around border-b border-gray-700 pb-2 mb-6">
+        {['Notes', 'Question Papers', 'Solved QPs', 'Other Notes'].map((label, index) => (
+          <button
+            key={label}
+            onClick={() => handleTabClick(index, label.toLowerCase().replace(' ', '-'))}
+            className={`text-lg font-medium transition ${
+              showUnderline === index
+                ? 'text-indigo-400 border-b-2 border-indigo-400'
+                : 'text-gray-400 hover:text-gray-200'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
       </div>
+
+      {/* Sorting Options */}
+      <div className="flex justify-between items-center mb-4">
+        <span className="text-sm text-gray-400">Sort by:</span>
+        <select
+          value={sortOption}
+          onChange={handleSortChange}
+          className="p-2 rounded-lg bg-gray-800 text-gray-200 focus:ring-2 focus:ring-indigo-500 outline-none"
+        >
+          <option value="">None</option>
+          <option value="title">Title</option>
+          <option value="downloads">Most Downloads</option>
+        </select>
+      </div>
+
+      {/* List Header */}
+      <div className="grid grid-cols-3 gap-4 p-4 bg-gray-800 rounded-lg mb-4">
+        <span className="font-bold text-gray-300">File Name</span>
+        <span className="font-bold text-gray-300 text-center">Downloads</span>
+        <span className="font-bold text-gray-300 text-right">Action</span>
+      </div>
+
+      {/* List Items */}
       {loading ? (
-        <div className="loading-spinner"></div>
-      ) : (
-        <>
-          <div className="list-header">
-            <span>File Name</span>
-            <span>Total Downloads</span>
-            <span>Download</span>
-          </div>
-          <div className="controls">
-            <div className="sort-options">
-              <label>Sort by: </label>
-              <select value={sortOption} onChange={handleSortChange}>
-                <option value="">None</option>
-                <option value="title">Title</option>
-                <option value="downloads">Most Downloads</option>
-              </select>
-            </div>
-          </div>
-          {filteredLists.length > 0 ? (
-            filteredLists.slice(0, visibleItems).map((list, index) => (
-              <div className="list-row slide-in" key={list.id} style={{ animationDelay: `${index * 0.1}s` }}>
-                <span className="truncated-title">{list.title}</span>
-                <span className='down'>{list.downloads}</span>
-                <span>
-                  <button
-                    className={`download-btn ${downloading === list.id ? 'downloading' : ''}`}
-                    onClick={() => handleDownloadClick(list)}
-                    disabled={downloading === list.id}
-                  >
-                    {downloading === list.id ? 'Downloading...' : 'Download'}
-                  </button>
-                </span>
-              </div>
-            ))
-          ) : (
-            <div className="no-items">There is nothing to show</div>
-          )}
-          {visibleItems < filteredLists.length && (
-            <button className="show-more-btn" onClick={handleShowMore}>
-              Show More
+        <div className="flex justify-center items-center h-48">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-indigo-500"></div>
+        </div>
+      ) : filteredLists.length > 0 ? (
+        filteredLists.slice(0, visibleItems).map((list) => (
+          <div
+            key={list.id}
+            className="grid grid-cols-3 gap-4 p-4 bg-gray-800 rounded-lg mb-4"
+          >
+            <span className="truncate">{list.title}</span>
+            <span className="text-center">{list.downloads}</span>
+            <button
+              className={`text-sm py-2 px-4 rounded-lg ${
+                downloading === list.id
+                  ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
+                  : 'bg-indigo-500 hover:bg-indigo-400 text-white'
+              }`}
+              onClick={() => handleDownloadClick(list)}
+              disabled={downloading === list.id}
+            >
+              {downloading === list.id ? 'Downloading...' : 'Download'}
             </button>
-          )}
-        </>
+          </div>
+        ))
+      ) : (
+        <div className="text-center text-gray-500">No items to display</div>
+      )}
+
+      {/* Show More Button */}
+      {visibleItems < filteredLists.length && (
+        <button
+          onClick={handleShowMore}
+          className="self-center mt-6 py-2 px-4 bg-gray-800 hover:bg-gray-700 text-white rounded-lg"
+        >
+          Show More
+        </button>
       )}
     </div>
   );

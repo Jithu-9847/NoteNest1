@@ -1,155 +1,40 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .code-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  header {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .notification {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #4caf50; /* Green */
-    color: white;
-    text-align: center;
-    padding: 10px;
-    z-index: 1000;
-  }
-  
-  .error-message {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #f44336; /* Red */
-    color: white;
-    text-align: center;
-    padding: 10px;
-    z-index: 1000;
-  }
-  
-  header h1 {
-    margin: 0;
-  }
-  
-  header nav a {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
-  }
-  
-  header .user-actions a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  main {
-     
-    margin-top: 20px;
-  }
-  
-  .new-paste {
-    flex: 0 0 65%;
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .new-paste h2 {
-    margin-top: 0;
-  }
-  
-  .new-paste textarea {
-    width: 96%;
-    height: 200px;
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: monospace;
-  }
-  
-  .optional-settings label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .optional-settings input{
-    width: 96%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  .optional-settings select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .optional-settings button {
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .recent-pastes {
-    flex: 0 0 25%;
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .recent-pastes h3 {
-    margin-top: 0;
-  }
-  
-  .recent-pastes ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .recent-pastes li {
-    display: flex;
-    background: #f9f9f9;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    justify-content: space-between;
-  }
-  
-  .recent-pastes li h4 {
-    margin: 0 0 10px;
-  }
-  
-  .recent-pastes li p {
-    margin: 0;
-  }
-  
+/* Custom Scrollbar Styling */
+.recent-pastes::-webkit-scrollbar {
+   
+  width: 8px; /* Width of the scrollbar */
+}
+
+.recent-pastes::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.032); /* Background of the track */
+  border-radius: 10px;
+}
+
+.recent-pastes::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4); /* Thumb (draggable part) color */
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.1); /* Optional: border to highlight thumb */
+}
+
+.recent-pastes::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.6); /* Thumb color when hovered */
+}
+
+#t-area::-webkit-scrollbar {
+   
+  width: 8px; /* Width of the scrollbar */
+}
+
+#t-area::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.032); /* Background of the track */
+  border-radius: 10px;
+}
+
+#t-area::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4); /* Thumb (draggable part) color */
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.1); /* Optional: border to highlight thumb */
+}
+
+#t-area::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.6); /* Thumb color when hovered */
+}

@@ -10,6 +10,8 @@ import Code from './codebox/code';
 import SplashPage from './splash_page/Splash';
 import AboutUs from './aboutus/AboutUs';
 import ContactUs from './contactus/ContactUs';
+import TermsOfUse from './term_and_privacy/term';
+import PrivacyPolicy from './term_and_privacy/privacy';
 
 function App() {
   const Home = () => (
@@ -67,6 +69,20 @@ function App() {
        <BottomPage/>
     </>
   );
+  const Privacypolicy = () => (
+    <>
+      
+      <PrivacyPolicy/>
+       
+    </>
+  );
+  const TermsUse = () => (
+    <>
+       
+      <TermsOfUse/>
+       
+    </>
+  );
   return (
     <Router>
       <Routes>
@@ -78,6 +94,8 @@ function App() {
         <Route path="/Contribute" element={<Contribute />} />
         <Route path="/FileNest" element={<FileNest />} />
         <Route path="/Files" element={<Files />} />
+        <Route path="/TermsOfUse" element={<TermsUse />} />
+        <Route path="/PrivacyPolicy" element={<Privacypolicy />} />
       </Routes>
     </Router>
   );
