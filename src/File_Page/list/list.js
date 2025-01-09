@@ -15,6 +15,7 @@ const List = () => {
   const [showUnderline, setShowUnderline] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  let type=['note','qp','solved-qp','other-note'];
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -115,7 +116,7 @@ const List = () => {
         {['Notes', 'Question Papers', 'Solved QPs', 'Other Notes'].map((label, index) => (
           <button
             key={label}
-            onClick={() => handleTabClick(index, label.toLowerCase().replace(' ', '-'))}
+            onClick={() => handleTabClick(index,type[index])}
             className={`text-lg font-medium transition ${
               showUnderline === index
                 ? 'text-indigo-400 border-b-2 border-indigo-400'
