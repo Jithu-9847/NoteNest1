@@ -9,7 +9,8 @@ export default () => {
       { title: "HOME", path: "/" },
       { title: "ABOUT", path: "/Aboutus" },
       { title: "CONTACT", path: "/Contactus" },
-      { title: "FILE NEST", path: "/FileNest" }
+      { title: "FILE NEST", path: "/FileNest" },
+      { title: "SNIPPET CHAT", path: "/Snippetchat" }
   ]
 
   const mobilenavigation = [

@@ -12,13 +12,13 @@ import AboutUs from './aboutus/AboutUs';
 import ContactUs from './contactus/ContactUs';
 import TermsOfUse from './term_and_privacy/term';
 import PrivacyPolicy from './term_and_privacy/privacy';
+import RealtimeChatApp from './chat/chat';
 
 function App() {
   const Home = () => (
     <>
       <NavBar />
       <LandingPage />
- 
       <BottomPage/>
     </>
   );
@@ -69,6 +69,13 @@ function App() {
        <BottomPage/>
     </>
   );
+  const Chat = () => (
+    <>
+      <NavBar />
+      <RealtimeChatApp/>
+       <BottomPage/>
+    </>
+  );
   const Privacypolicy = () => (
     <>
       
@@ -96,6 +103,7 @@ function App() {
         <Route path="/Files" element={<Files />} />
         <Route path="/TermsOfUse" element={<TermsUse />} />
         <Route path="/PrivacyPolicy" element={<Privacypolicy />} />
+        <Route path="/Snippetchat" element={<Chat/>} />
       </Routes>
     </Router>
   );

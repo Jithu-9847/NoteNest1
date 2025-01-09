@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import './code.css'
+import { FaSave, FaCopy, FaPlusCircle, FaClipboardList } from 'react-icons/fa';
+import './code.css';
+
 function Code() {
   const [snippets, setSnippets] = useState([]);
   const [name, setName] = useState('');
@@ -87,7 +89,9 @@ function Code() {
       <main className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
         {/* New Paste Section */}
         <div className="new-paste bg-gray-800 p-6 rounded-lg shadow-lg h-full">
-          <h2 className="text-xl font-semibold mb-4">New Paste</h2>
+          <h2 className="text-xl font-semibold mb-4 flex items-center">
+            <FaPlusCircle className="mr-2" /> New Paste
+          </h2>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -103,20 +107,12 @@ function Code() {
               placeholder="Paste Title"
               className="w-full p-2 mb-4 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600"
             />
-            <label className="block text-sm font-medium mb-2">Syntax Highlighting</label>
-            <select className="w-full p-2 mb-4 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
-              <option value="plaintext">Plaintext</option>
-            </select>
-            <label className="block text-sm font-medium mb-2">Paste Expiration</label>
-            <select className="w-full p-2 mb-4 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
-              <option value="never">Never</option>
-            </select>
             <button
               onClick={handleSave}
               disabled={is_enable}
-              className="w-full p-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+              className="w-full p-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 flex items-center justify-center"
             >
-              {save}
+              <FaSave className="mr-2" /> {save}
             </button>
             <h4 className="text-orange-400 mt-4 text-sm">
               Note: You can only access the latest 10 pastes. After reaching this limit, old pastes will be deleted.
@@ -126,34 +122,34 @@ function Code() {
 
         {/* Recent Pastes Section */}
         <div className="recent-pastes bg-gray-800 p-6 rounded-lg shadow-lg h-[80vh] overflow-hidden overflow-y-scroll scroll-smooth">
-  <h3 className="text-xl font-semibold mb-4">Recent Pastes</h3>
-  <ul className="space-y-4">
-    {snippets
-      .slice()
-      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) // Sort by timestamp (newest first)
-      .map((snippet) => (
-        <li
-          key={snippet.id}
-          className="flex justify-between items-center bg-gray-700 p-4 rounded-lg"
-        >
-          <h4
-            onClick={() => handleTitleClick(snippet)}
-            className="text-lg font-medium cursor-pointer hover:text-indigo-400"
-          >
-            {snippet.name || 'Untitled'}
-          </h4>
-          <button
-            onClick={() => handleCopy(snippet.content)}
-            className="text-indigo-400 hover:text-indigo-600"
-          >
-            Copy
-          </button>
-        </li>
-      ))}
-  </ul>
-</div>
-
-
+          <h3 className="text-xl font-semibold mb-4 flex items-center">
+            <FaClipboardList className="mr-2" /> Recent Pastes
+          </h3>
+          <ul className="space-y-4">
+            {snippets
+              .slice()
+              .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) // Sort by timestamp (newest first)
+              .map((snippet) => (
+                <li
+                  key={snippet.id}
+                  className="flex justify-between items-center bg-gray-700 p-4 rounded-lg"
+                >
+                  <h4
+                    onClick={() => handleTitleClick(snippet)}
+                    className="text-lg font-medium cursor-pointer hover:text-indigo-400"
+                  >
+                    {snippet.name || 'Untitled'}
+                  </h4>
+                  <button
+                    onClick={() => handleCopy(snippet.content)}
+                    className="text-indigo-400 hover:text-indigo-600 flex items-center"
+                  >
+                    <FaCopy className="mr-1" /> Copy
+                  </button>
+                </li>
+              ))}
+          </ul>
+        </div>
       </main>
 
       {/* Selected Snippet Display */}
@@ -165,7 +161,6 @@ function Code() {
             readOnly
             className="w-full p-4 bg-gray-700 text-white rounded-md focus:outline-none"
             rows={15}
-            id='t-area'
           ></textarea>
         </div>
       )}
