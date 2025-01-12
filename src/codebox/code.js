@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { FaSave, FaCopy, FaPlusCircle, FaClipboardList } from 'react-icons/fa';
+import { FaSave, FaCopy, FaPlusCircle, FaClipboardList,FaTimes } from 'react-icons/fa';
 import './code.css';
 
 function Code() {
@@ -155,7 +155,16 @@ function Code() {
       {/* Selected Snippet Display */}
       {selectedSnippet && (
         <div className="selected-snippet mt-6 bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-3xl scroll-smooth">
-          <h3 className="text-xl font-semibold mb-4">{selectedSnippet.name || 'Untitled'}</h3>
+          <div className=' w-full flex justify-between items-center mb-5'>
+
+          <h3 className="text-xl font-semibold">{selectedSnippet.name || 'Untitled'}</h3>
+          <button onClick={()=>setSelectedSnippet(null)}><>
+
+          <FaTimes/>
+          
+          </></button>
+          </div>
+         
           <textarea
             value={selectedSnippet.content}
             readOnly
