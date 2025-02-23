@@ -7,6 +7,7 @@ import card3 from "../assests/ace-exam.jpg";
 import DecryptedText from '../animations/text-animation';
 
 function LandingPage() {
+  console.log("hello world")
   return (
     <div className="min-h-screen flex flex-col bg-gray-900 text-white">
 

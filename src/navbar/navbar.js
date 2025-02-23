@@ -22,7 +22,7 @@ export default () => {
 ]
 
   return (
-      <nav className="bg-gray-900 w-full border-b md:border-0 md:static">
+      <nav className="bg-gray-900 w-full border-b md:border-0 md:static z-50">
           <div className="items-cente md:flex md:px-8 w-full items-center">
               <div className="flex items-center justify-between py-3 md:py-5 md:block">
                     <a href="javascript:void(0)">
@@ -38,7 +38,7 @@ export default () => {
 
                     </a>
                   <div className="md:hidden">
-                      <button className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
+                      <button className="text-white outline-none p-2 rounded-md focus:border-gray-400 focus:border"
                           onClick={() => setState(!state)}
                       >
                           {

@@ -3,6 +3,16 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { getDatabase } from "firebase/database";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInAnonymously,
+  sendPasswordResetEmail,
+  updateProfile,
+} from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCHRHj59Z-Q-esM_cOwQ5NUUyD31nCfBw0',
@@ -17,5 +27,15 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 const database = getDatabase(app);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
-export { db, storage, database };
+export { db, storage, database,auth,
+  googleProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInAnonymously,
+  sendPasswordResetEmail,
+  updateProfile,
+ };

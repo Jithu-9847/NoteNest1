@@ -8,41 +8,64 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Upload from './upload/Upload';
 import S5 from './Course_select/S5';
 import Code from './codebox/code';
-import SplashPage from './splash_page/Splash';
 import AboutUs from './aboutus/AboutUs';
 import ContactUs from './contactus/ContactUs';
 import TermsOfUse from './term_and_privacy/term';
 import PrivacyPolicy from './term_and_privacy/privacy';
 import RealtimeChatApp from './chat/chat';
 import SplashCursor from './cursor-animation/cursor';
-
+import PageNotFound from './Page-not-Found/PageNotFound';
+import SignIn from './Signin-login/SignIn';
+import Login from './Signin-login/login';
+import EventCard from './Signin-login/test';
+import AdminDashboard from './admin/admin';
+import { getDatabase, ref, onValue } from "firebase/database";
 function App() {
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isWebsiteDown, setIsWebsiteDown] = useState(false);
 
   useEffect(() => {
     // Function to check the screen size
     const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth >= 1024); // Adjust this breakpoint as needed
+      setIsDesktop(window.innerWidth >= 1024);
     };
 
-    // Check screen size on initial render
     checkScreenSize();
-
-    // Add event listener to handle resizing
     window.addEventListener('resize', checkScreenSize);
-
-    // Cleanup the event listener
     return () => {
       window.removeEventListener('resize', checkScreenSize);
     };
   }, []);
 
+  useEffect(() => {
+    // Function to check website status from Realtime Database
+    const db = getDatabase();
+    const statusRef = ref(db, "shutdown");
+
+    const unsubscribe = onValue(statusRef, (snapshot) => {
+      const status = snapshot.val();
+       
+      status["status"] ? setIsWebsiteDown(true) : setIsWebsiteDown(false);
+       
+    });
+
+       
+  }, []);
+
   const Home = () => (
     <>
-      {isDesktop && <SplashCursor />} {/* Render only on desktop */}
-      <NavBar />
-      <LandingPage />
-      <BottomPage />
+      
+      
+      {isWebsiteDown ? (
+        <div className=" text-xl text-red-600">The website is currently down. Please try again later.</div>
+      ) : (
+        <>
+        {isDesktop && <SplashCursor />}
+        <NavBar />
+          <LandingPage />
+          <BottomPage />
+        </>
+      )}
     </>
   );
 
@@ -111,6 +134,7 @@ function App() {
   const TermsUse = () => (
     <>
       <TermsOfUse />
+       
     </>
   );
 
@@ -127,6 +151,10 @@ function App() {
         <Route path="/TermsOfUse" element={<TermsUse />} />
         <Route path="/PrivacyPolicy" element={<Privacypolicy />} />
         <Route path="/Snippetchat" element={<Chat />} />
+        <Route path='*' element={<PageNotFound/>} />
+        <Route path="/signin" element={<SignIn/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/Admin" element={<AdminDashboard/>} />
       </Routes>
     </Router>
   );
