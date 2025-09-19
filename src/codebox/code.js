@@ -138,7 +138,7 @@ function Code() {
                     onClick={() => handleTitleClick(snippet)}
                     className="text-lg font-medium cursor-pointer hover:text-indigo-400"
                   >
-                    {snippet.name || 'Untitled'}
+                    {snippet.title || 'Untitled'}
                   </h4>
                   <button
                     onClick={() => handleCopy(snippet.content)}
